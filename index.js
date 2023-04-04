@@ -2,6 +2,9 @@ const express = require('express')
 const app = express()
 const port = 5000
 const bodyParser = require('body-parser')
+
+const config = require('./config/key')
+
 const {User} = require("./models/User")
 
 app.use(bodyParser.urlencoded({extended: true}))
@@ -11,7 +14,7 @@ app.use(bodyParser.json());
 
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb+srv://LSH:12345@cluster0.95uyika.mongodb.net/?retryWrites=true&w=majority').then(() => console.log('MongoDB connect...'))
+mongoose.connect(config.mongoURI).then(() => console.log('MongoDB connect...'))
 .catch(err => console.log(err))
     
 
@@ -29,7 +32,6 @@ app.get('/', (req, res) => {
 //         if(err) return res.json({success: false, err})
 //         return res.status(200).json({
 //             success: true 
-gg
 //         })
 //     })
 // })
